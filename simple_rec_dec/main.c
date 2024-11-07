@@ -17,7 +17,6 @@ int yylex();
 void process_token();
 void data();
 void list();
-void string();
 
 void process_token() {
     int tok = yylex();
@@ -33,14 +32,14 @@ void data(int tok) {
         case SYM:
             printf("%s", attr);
             break;
+        case STR:
+            printf("\"%s\"", attr);
+            break;
         case LPAREN:
             list();
             break;
         case RPAREN:
             break;
-        case QUOT:
-            string();
-            printf("%s", buf);
         default:
             break;
     }
@@ -60,18 +59,6 @@ void list() {
         printf(")");
     }
 
-}
-
-void string() {
-    int i = 0;
-    int tok = yylex();
-    while(tok != QUOT) {
-        strcpy(buf + i, attr);
-        i += strlen(attr);
-        buf[i++] = ' ';
-
-        tok = yylex();
-    }
 }
 
 int main() {
