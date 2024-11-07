@@ -5,6 +5,15 @@
 
 A simple Recursive Decsent Parser
 
+```
+<data> ::= <integer>
+         | <symbol>
+         | <list>
+         ;
+<list> ::= "(" { <data> } ")"
+         ;
+```
+
 ### data.l
 
 ```lex
