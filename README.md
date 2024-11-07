@@ -1,9 +1,11 @@
 # simple_compiler
 🗡 Lets study compiler 🛡
 
-#### simple_rec_dec
+## simple_rec_dec
 
 A simple Recursive Decsent Parser
+
+### data.l
 
 ```lex
 %{
