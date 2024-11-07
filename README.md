@@ -28,7 +28,6 @@ A simple Recursive Decsent Parser
     #define STR 303
     #define LPAREN 304
     #define RPAREN 305
-    #define QUOT 306
 
     char attr[256];
 %}
@@ -36,17 +35,20 @@ A simple Recursive Decsent Parser
 ilit [0-9]+
 id [a-zA-Z][a-zA-Z0-9]*
 special [~!@#$%^&*-+=]+
+comment ";"[^\n]*"\n"
+string \"[^\"]*\"
 
 %%
 
 [ \t]+ {}                                          // eat white spaces
-";"[^\n]*"\n" {}                                   // eat comments (all words from ';' to newline)
 "(" { return LPAREN; }                             // start of List
 ")" { return RPAREN; }                             // end of List
-"\"" { return QUOT; }                              // string until next \"
+{string} { strcpy(attr, yytext + 1); attr[strlen(attr) - 1] = '\0'; return STR; }   // copy string
 {ilit} { strcpy(attr, yytext); return NUM; }       // literal [0-9]+
 {id} { strcpy(attr, yytext); return SYM; }         // id [a-zA-Z]+
 {special} {}                                       // eat specials [~!@#$%^&*-+=]+
+{comment} {}                                       // eat comments ";"[^\n]*"\n"
+
 
 %%
 
