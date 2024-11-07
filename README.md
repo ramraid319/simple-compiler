@@ -39,14 +39,14 @@ special [~!@#$%^&*-+=]+
 
 %%
 
-[ \t]+ {}
-";"[^\n]*"\n" {}
-"(" { return LPAREN; }
-")" { return RPAREN; }
-"\"" { return QUOT; }
-{ilit} { strcpy(attr, yytext); return NUM; }
-{id} { strcpy(attr, yytext); return SYM; }
-{special} {}
+[ \t]+ {}                                          // eat white spaces
+";"[^\n]*"\n" {}                                   // eat comments (all words from ';' to newline)
+"(" { return LPAREN; }                             // start of List
+")" { return RPAREN; }                             // end of List
+"\"" { return QUOT; }                              // string until next \"
+{ilit} { strcpy(attr, yytext); return NUM; }       // literal [0-9]+
+{id} { strcpy(attr, yytext); return SYM; }         // id [a-zA-Z]+
+{special} {}                                       // eat specials [~!@#$%^&*-+=]+
 
 %%
 
