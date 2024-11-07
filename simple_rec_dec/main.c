@@ -6,7 +6,6 @@
 #define STR 303
 #define LPAREN 304
 #define RPAREN 305
-#define QUOT 306
 
 int loop = 100;
 extern char attr[];
