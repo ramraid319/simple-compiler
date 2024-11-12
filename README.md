@@ -42,7 +42,7 @@ operator "+"|"-"|"*"|"/"
 
 %%
 
-/* return type of token */
+// return type of token
 
 [ \t]+ {}                                    // eat white spaces
 "(" { return '('; }
