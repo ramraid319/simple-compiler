@@ -6,7 +6,6 @@
     #define STRING    303
     #define OPERATOR  304
 
-    char operator;
 %}
 
 niliteral -[0-9]+
