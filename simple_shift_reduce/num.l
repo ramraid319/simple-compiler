@@ -3,8 +3,15 @@
     #include "y.tab.h"
 %}
 %%
-[0-9]+ return(NUMBER);
+"+"?[0-9]+              return(NUMBER);
+-[0-9]                  return(NUMBER);
+[a-zA-Z][a-zA-Z0-9]*    return(SYMBOL);
+\"[^\"]*\"              return(STRING);
+";"[^\n]*"\n"   ;
+[~!@#$%^&=]+    ;
 [ \t]  ;
+\(     return('(');
+\)     return(')');
 \+     return('+');
 \-     return('-');
 \*     return('*');

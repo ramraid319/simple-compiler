@@ -4,17 +4,35 @@
     int yyerror(char *s);
 %}
 %token NUMBER
+%token SYMBOL
+%token STRING
 %%
-Expr    : Expr '+' Term {puts("E -> E + T");}
-        | Expr '-' Term {puts("E -> E - T");}
-        | Term          {puts("E -> T");}
+Input   : Expr          {puts("Input -> Expr");}
+        | STRING        {puts("Input -> STRING");}
+        | Data          {puts("Input -> Data");}
         ;
-Term    : Term '*' Factor {puts("T -> T * F");}
-        | Term '/' Factor {puts("T -> T / F");}
-        | Factor          {puts("T -> F");}
+
+List    : '(' Data ')'  {puts("List -> (Data)");}
+        | '('')'        {puts("List -> NIL");}
+        | Data Data     {puts("List -> Data Data");}
         ;
-Factor  : NUMBER        {puts("F -> n");}
+
+Data    : Factor        {puts("Data -> Factor");}
+        | SYMBOL        {puts("Data -> SYMBOL");}
+        | List          {puts("Data -> List");}
         ;
+
+Expr    : Expr '+' Term {puts("Expr -> Expr + Term");}
+        | Expr '-' Term {puts("Expr -> Expr - Term");}
+        | Term          {puts("Expr -> Term");}
+        ;
+Term    : Term '*' Factor {puts("Term -> Term * Factor");}
+        | Term '/' Factor {puts("Term -> Term / Factor");}
+        | Factor          {puts("Term -> Factor");}
+        ;
+Factor  : NUMBER        {puts("Factor -> NUMBER");}
+        ;
+
 %%
 
 int main() {
